@@ -92,7 +92,30 @@
         "description": "",
         "kibanaSavedObjectMeta": {
             "searchSourceJSON": {
-                "filter": [],
+                "filter": [
+                    {
+                        "$state": {
+                            "store": "appState"
+                        },
+                        "meta": {
+                            "alias": "Job Runs",
+                            "disabled": false,
+                            "field": "data_stream.dataset",
+                            "index": "logs-*",
+                            "key": "data_stream.dataset",
+                            "negate": false,
+                            "params": {
+                                "query": "databricks.job_runs"
+                            },
+                            "type": "phrase"
+                        },
+                        "query": {
+                            "match_phrase": {
+                                "data_stream.dataset": "databricks.job_runs"
+                            }
+                        }
+                    }
+                ],
                 "query": {
                     "language": "kuery",
                     "query": ""
@@ -136,7 +159,7 @@
                             "index_pattern_ref_name": "metrics_0_index_pattern",
                             "interval": "",
                             "isModelInvalid": false,
-                            "markdown": "![](https://cdn.bfldr.com/9AYANS2F/at/k8bgnnxhb4bggjk88r4x9snf/databricks-symbol-color.svg?auto=webp\u0026format=svg)",
+                            "markdown": "![](https://cdn.bfldr.com/9AYANS2F/at/k8bgnnxhb4bggjk88r4x9snf/databricks-symbol-color.svg?auto=webp&format=svg)",
                             "markdown_css": "display:block; \nmargin:0 auto;\nwidth: 55%; \nalign: center;",
                             "markdown_vertical_align": "middle",
                             "max_lines_legend": 1,
