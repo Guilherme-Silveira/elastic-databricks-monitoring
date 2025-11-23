@@ -1,0 +1,251 @@
+- name: data_stream.type
+  type: constant_keyword
+  description: Data stream type.
+- name: data_stream.dataset
+  type: constant_keyword
+  description: Data stream dataset.
+- name: data_stream.namespace
+  type: constant_keyword
+  description: Data stream namespace.
+- name: '@timestamp'
+  type: date
+  description: Event timestamp.
+- name: job
+  type: group
+  fields:
+    - name: job_id
+      type: keyword
+      description: The canonical identifier of the job
+    - name: job_run_id
+      type: keyword
+      description: The canonical identifier of the run
+    - name: run_id
+      type: keyword
+      description: The run identifier
+    - name: original_attempt_run_id
+      type: keyword
+      description: The original attempt run identifier
+    - name: run_number
+      type: long
+      description: The sequence number of this run attempt for the job
+    - name: number_in_job
+      type: keyword
+      description: The sequence number of this run attempt for the job (as keyword)
+    - name: run_name
+      type: keyword
+      description: The name of the job run
+    - name: run_page_url
+      type: keyword
+      description: The URL of the run page in the Databricks UI
+    - name: run_type
+      type: keyword
+      description: The type of run (JOB_RUN, WORKFLOW_RUN, SUBMIT_RUN)
+    - name: run_duration
+      type: long
+      description: The duration of the run in milliseconds
+      unit: ms
+    - name: start_time
+      type: date
+      description: The time at which this run was started
+    - name: end_time
+      type: date
+      description: The time at which this run ended
+    - name: setup_duration
+      type: long
+      description: The time in milliseconds it took to set up the cluster
+      unit: ms
+    - name: execution_duration
+      type: long
+      description: The time in milliseconds it took to execute the commands in the JAR or notebook
+      unit: ms
+    - name: cleanup_duration
+      type: long
+      description: The time in milliseconds it took to terminate the cluster and clean up any intermediate results
+      unit: ms
+    - name: queue_duration
+      type: long
+      description: The time in milliseconds the run was queued
+      unit: ms
+    - name: creator_user_name
+      type: keyword
+      description: The creator user name
+    - name: state
+      type: group
+      fields:
+        - name: life_cycle_state
+          type: keyword
+          description: The life cycle state of the job (PENDING, RUNNING, TERMINATING, TERMINATED, SKIPPED, INTERNAL_ERROR)
+        - name: result_state
+          type: keyword
+          description: The result state of the job (SUCCESS, FAILED, CANCELED, TIMEDOUT)
+        - name: state_message
+          type: text
+          description: A descriptive message for the current state
+        - name: user_cancelled_or_timedout
+          type: boolean
+          description: Whether the run was cancelled by the user or timed out
+    - name: status
+      type: group
+      fields:
+        - name: state
+          type: keyword
+          description: The current state of the run
+        - name: termination_details
+          type: group
+          fields:
+            - name: code
+              type: keyword
+              description: The termination code
+            - name: type
+              type: keyword
+              description: The type of termination
+    - name: tasks
+      type: group
+      description: Task information for the job run
+      fields:
+        - name: run_id
+          type: keyword
+          description: The ID of the task run
+        - name: start_time
+          type: date
+          description: The time at which the task was started
+        - name: end_time
+          type: date
+          description: The time at which the task ended
+        - name: setup_duration
+          type: long
+          description: The time in milliseconds it took to set up the task
+          unit: ms
+        - name: execution_duration
+          type: long
+          description: The time in milliseconds it took to execute the task
+          unit: ms
+        - name: cleanup_duration
+          type: long
+          description: The time in milliseconds it took to clean up the task
+          unit: ms
+        - name: queue_duration
+          type: long
+          description: The time in milliseconds the task was queued
+          unit: ms
+    - name: task
+      type: group
+      fields:
+        - name: run_id
+          type: keyword
+          description: The ID of the task run
+        - name: task_key
+          type: keyword
+          description: The unique key of the task
+        - name: description
+          type: text
+          description: An optional description of the task
+        - name: state
+          type: group
+          fields:
+            - name: life_cycle_state
+              type: keyword
+              description: The life cycle state of the task
+            - name: result_state
+              type: keyword
+              description: The result state of the task
+        - name: start_time
+          type: date
+          description: The time at which this task was started
+        - name: end_time
+          type: date
+          description: The time at which this task ended
+        - name: execution_duration
+          type: long
+          description: The time in milliseconds it took to execute the task
+    - name: trigger
+      type: keyword
+      description: The trigger that started this run (ONE_TIME, PERIODIC, RETRY, RUN_JOB_TASK)
+    - name: schedule
+      type: group
+      fields:
+        - name: quartz_cron_expression
+          type: keyword
+          description: A Cron expression using Quartz syntax
+        - name: timezone_id
+          type: keyword
+          description: A Java timezone ID
+        - name: pause_status
+          type: keyword
+          description: Whether the schedule is paused or not
+- name: databricks
+  type: group
+  fields:
+    - name: cluster_id
+      type: keyword
+      description: The ID of the cluster used by the run (or 'Serverless' for serverless jobs)
+    - name: cluster_name
+      type: keyword
+      description: The name of the cluster
+    - name: workspace_id
+      type: keyword
+      description: The ID of the Databricks workspace
+    - name: node_role
+      type: keyword
+      description: Role (Driver or Executor)
+    - name: container_ip
+      type: keyword
+      description: The IP address of the container
+    - name: instance_type
+      type: keyword
+      description: The instance type of the cluster node
+    - name: is_job_cluster
+      type: keyword
+      description: Whether the cluster is a job cluster or interactive cluster
+- name: event
+  type: group
+  fields:
+    - name: id
+      type: keyword
+      description: Unique ID to describe the event (job_run_id)
+    - name: kind
+      type: keyword
+      description: Event kind (event)
+    - name: type
+      type: keyword
+      description: Event type
+    - name: category
+      type: keyword
+      description: Event category
+    - name: module
+      type: keyword
+      description: Name of the module this data is coming from
+    - name: dataset
+      type: keyword
+      description: Name of the dataset
+    - name: start
+      type: date
+      description: The start time of the job run
+    - name: end
+      type: date
+      description: The end time of the job run
+    - name: duration
+      type: long
+      description: Duration of the event in nanoseconds
+      unit: nanos
+    - name: outcome
+      type: keyword
+      description: The outcome of the job run (success, failure, unknown)
+- name: user
+  type: group
+  fields:
+    - name: name
+      type: keyword
+      description: Short name or login of the user
+- name: cloud
+  type: group
+  fields:
+    - name: provider
+      type: keyword
+      description: Name of the cloud provider (aws, azure, gcp)
+- name: related
+  type: group
+  fields:
+    - name: user
+      type: keyword
+      description: All the user names or other user identifiers seen on the event

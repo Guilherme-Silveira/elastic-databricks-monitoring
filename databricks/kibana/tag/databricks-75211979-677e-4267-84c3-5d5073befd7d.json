@@ -1,0 +1,15 @@
+{
+    "attributes": {
+        "color": "#ff0000",
+        "description": "",
+        "name": "Databricks"
+    },
+    "coreMigrationVersion": "8.8.0",
+    "created_at": "2025-11-23T00:32:52.848Z",
+    "created_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0",
+    "id": "databricks-75211979-677e-4267-84c3-5d5073befd7d",
+    "references": [],
+    "type": "tag",
+    "typeMigrationVersion": "8.0.0",
+    "updated_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0"
+}

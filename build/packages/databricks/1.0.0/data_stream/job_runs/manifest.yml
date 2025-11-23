@@ -1,0 +1,8 @@
+title: Databricks Job Runs
+type: logs
+dataset: databricks.job_runs
+streams:
+  - input: httpjson
+    title: Databricks Job Runs
+    description: Collect job run information from Databricks Jobs API
+    template_path: httpjson.yml.hbs

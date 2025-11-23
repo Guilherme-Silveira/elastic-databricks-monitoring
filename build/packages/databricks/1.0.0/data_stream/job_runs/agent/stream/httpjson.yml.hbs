@@ -1,0 +1,85 @@
+data_stream:
+  dataset: databricks.job_runs
+request.url: "{{databricks_host}}/api/2.2/jobs/runs/list?expand_tasks=true"
+request.method: GET
+request.interval: {{request_interval}}
+request.transforms:
+  - set:
+      target: header.Authorization
+      value: 'Bearer {{databricks_token}}'
+  - set:
+      target: url.params.start_time_from
+      value: '[[ mul ((now (parseDuration "-{{lookback_period}}")).Unix) 1000 ]]'
+response.split:
+  target: body.runs
+  split:
+    target: body.tasks
+    keep_parent: true
+    transforms:
+      - set:
+          target: body.is_within_interval_range
+          value: '[[ and (ge (toInt .body.end_time) (mul ((now (parseDuration "-{{request_interval}}")).Unix) 1000)) ]]'
+          value_type: json
+response.pagination:
+  - set:
+      target: url.params.page_token
+      value: '[[ if .last_response.body.next_page_token ]][[ .last_response.body.next_page_token ]][[ end ]]'
+      do_not_log_failure: true
+      fail_on_template_error: true
+response.decode_as: application/json
+processors:
+  - decode_json_fields:
+      fields: ["message"]
+      process_array: true
+      max_depth: 2
+      target: "job"
+      overwrite_keys: false
+      add_error_key: true
+  - drop_event:
+      when:
+        and:
+          - equals:
+              job.status.state: 'TERMINATED'
+          - equals: 
+              job.is_within_interval_range: false
+  - drop_fields:
+      fields: ["message"]
+      ignore_missing: true
+  - script:
+      lang: javascript
+      source: |
+        function process(event) {
+          try {
+            var job = event.Get("job");
+            if (job != null && typeof job === 'object') {
+              // Convert timestamps from milliseconds to ISO format
+              if (job.start_time != null && job.start_time > 0) {
+                var startDate = new Date(job.start_time);
+                event.Put("job.start_time", startDate.toISOString());
+              }
+              if (job.end_time != null && job.end_time > 0) {
+                var endDate = new Date(job.end_time);
+                event.Put("job.end_time", endDate.toISOString());
+              }
+              // Calculate duration if both timestamps exist
+              if (job.start_time != null && job.end_time != null && job.end_time > 0) {
+                event.Put("job.run_duration", job.end_time - job.start_time);
+              }
+            }
+          } catch (e) {
+            // Silently ignore errors to prevent event dropping
+          }
+        }
+  - add_fields:
+      target: ''
+      fields:
+        data_stream.type: logs
+        data_stream.dataset: databricks.job_runs
+tags:
+{{#if preserve_original_event}}
+  - preserve_original_event
+{{/if}}
+{{#each tags as |tag|}}
+  - {{tag}}
+{{/each}}
+

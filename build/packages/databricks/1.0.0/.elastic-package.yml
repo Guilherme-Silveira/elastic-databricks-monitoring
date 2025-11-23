@@ -1,0 +1,9 @@
+# Configure elastic-package to use external stack
+profiles:
+  - name: external
+    elasticsearch:
+      host: http://192.168.136.128:9200
+      username: elastic
+      password: changeme
+    kibana:
+      host: http://192.168.136.128:5601

@@ -1,0 +1,58 @@
+format_version: 3.0.0
+name: databricks
+title: Databricks
+version: 1.0.0
+description: Collect metrics and logs from Databricks clusters and job runs
+type: integration
+categories:
+  - observability
+  - datastore
+conditions:
+  kibana:
+    version: "^8.8.0"
+  elastic:
+    subscription: basic
+icons:
+  - src: "/img/databricks-logo.svg"
+    title: "databricks logo"
+    size: "32x32"
+    type: "image/svg+xml"
+policy_templates:
+  - name: databricks
+    title: Databricks Job Runs Monitoring
+    description: Collect job run information from Databricks API
+    inputs:
+      - type: httpjson
+        title: Databricks Job Runs
+        description: Collect job run information from Databricks Jobs API
+        vars:
+          - name: databricks_host
+            type: text
+            title: Databricks Host
+            description: The Databricks workspace URL (e.g., https://your-workspace.cloud.databricks.com)
+            required: true
+            show_user: true
+          - name: databricks_token
+            type: password
+            title: Databricks Access Token
+            description: Personal Access Token or Service Principal token for Databricks API
+            required: true
+            show_user: true
+            secret: true
+          - name: request_interval
+            type: text
+            title: Request Interval
+            description: How often to poll the Databricks API
+            default: 5m
+            required: true
+            show_user: true
+          - name: lookback_period
+            type: text
+            title: Lookback Period
+            description: How far back to look for job runs
+            default: 5h
+            required: true
+            show_user: true
+owner:
+  github: elastic/integrations
+  type: elastic

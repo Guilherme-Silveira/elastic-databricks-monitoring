@@ -1,0 +1,123 @@
+---
+description: Pipeline for processing Databricks job runs
+on_failure:
+  - set:
+      field: error.message
+      value: "Pipeline processing failed: {{ _ingest.on_failure_message }}"
+      override: false
+processors:
+  - script:
+      description: Extract cluster_id from job run or task data
+      lang: painless
+      ignore_failure: true
+      source: |
+        try {
+          def cid = 'Serverless';
+          
+          if (ctx?.job != null) {
+            if (ctx.job?.cluster_instance?.cluster_id != null) {
+              cid = ctx.job.cluster_instance.cluster_id.toString();
+            } else if (ctx.job?.tasks?.cluster_instance?.cluster_id != null) {
+              cid = ctx.job.tasks.cluster_instance.cluster_id.toString();
+            }
+          }
+          
+          if (ctx.databricks == null) { ctx.databricks = new HashMap(); }
+          ctx.databricks.cluster_id = cid;
+        } catch (Exception e) {
+          if (ctx.databricks == null) { ctx.databricks = new HashMap(); }
+          ctx.databricks.cluster_id = 'Serverless';
+        }
+  - set:
+      field: ecs.version
+      value: '8.11.0'
+  - set:
+      field: event.kind
+      value: event
+  - set:
+      field: event.type
+      value: ["info"]
+  - set:
+      field: event.category
+      value: ["process"]
+  - set:
+      field: event.module
+      value: databricks
+  - set:
+      field: event.dataset
+      value: databricks.job_runs
+
+  - date:
+      field: job.start_time
+      target_field: event.start
+      formats:
+        - ISO8601
+      if: ctx.job?.start_time != null
+      ignore_failure: true
+  - date:
+      field: job.end_time
+      target_field: event.end
+      formats:
+        - ISO8601
+      if: ctx.job?.end_time != null
+      ignore_failure: true
+  - script:
+      lang: painless
+      description: Calculate event duration from job.run_duration
+      if: ctx.job?.run_duration != null
+      ignore_failure: true
+      source: |
+        try {
+          if (ctx.event == null) { ctx.event = new HashMap(); }
+          def duration = ctx.job.run_duration;
+          if (duration != null && duration instanceof Number && ((Number)duration).longValue() > 0) {
+            ctx.event.duration = ((Number)duration).longValue() * 1000000L;
+          }
+        } catch (Exception e) {
+          // Ignore duration calculation errors
+        }
+  - set:
+      field: event.outcome
+      value: success
+      if: ctx.job?.state?.result_state == 'SUCCESS'
+  - set:
+      field: event.outcome
+      value: failure
+      if: ctx.job?.state?.result_state == 'FAILED'
+  - set:
+      field: event.outcome
+      value: unknown
+      if: ctx.job?.state?.result_state == 'CANCELED'
+  - append:
+      field: related.user
+      value: "{{{job.creator_user_name}}}"
+      if: ctx.job?.creator_user_name != null
+      allow_duplicates: false
+      ignore_failure: true
+  - set:
+      field: cloud.provider
+      value: azure
+      if: ctx.databricks_host != null && ctx.databricks_host.contains('azuredatabricks.net')
+      ignore_failure: true
+  - set:
+      field: cloud.provider
+      value: aws
+      if: ctx.databricks_host != null && ctx.databricks_host.contains('cloud.databricks.com')
+      ignore_failure: true
+  - set:
+      field: cloud.provider
+      value: gcp
+      if: ctx.databricks_host != null && ctx.databricks_host.contains('gcp.databricks.com')
+      ignore_failure: true
+  - remove:
+      field:
+        - job.is_within_interval_range
+        - message
+      ignore_missing: true
+      ignore_failure: true
+  - remove:
+      field: event.original
+      if: ctx.tags == null || !(ctx.tags.contains('preserve_original_event'))
+      ignore_failure: true
+      ignore_missing: true
+
