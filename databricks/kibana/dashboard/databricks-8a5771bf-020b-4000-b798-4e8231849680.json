@@ -92,30 +92,7 @@
         "description": "",
         "kibanaSavedObjectMeta": {
             "searchSourceJSON": {
-                "filter": [
-                    {
-                        "$state": {
-                            "store": "appState"
-                        },
-                        "meta": {
-                            "alias": "Job Runs",
-                            "disabled": false,
-                            "field": "data_stream.dataset",
-                            "index": "logs-*",
-                            "key": "data_stream.dataset",
-                            "negate": false,
-                            "params": {
-                                "query": "databricks.job_runs"
-                            },
-                            "type": "phrase"
-                        },
-                        "query": {
-                            "match_phrase": {
-                                "data_stream.dataset": "databricks.job_runs"
-                            }
-                        }
-                    }
-                ],
+                "filter": [],
                 "query": {
                     "language": "kuery",
                     "query": ""
@@ -159,7 +136,7 @@
                             "index_pattern_ref_name": "metrics_0_index_pattern",
                             "interval": "",
                             "isModelInvalid": false,
-                            "markdown": "![](https://cdn.bfldr.com/9AYANS2F/at/k8bgnnxhb4bggjk88r4x9snf/databricks-symbol-color.svg?auto=webp&format=svg)",
+                            "markdown": "![](https://cdn.bfldr.com/9AYANS2F/at/k8bgnnxhb4bggjk88r4x9snf/databricks-symbol-color.svg?auto=webp\u0026format=svg)",
                             "markdown_css": "display:block; \nmargin:0 auto;\nwidth: 55%; \nalign: center;",
                             "markdown_vertical_align": "middle",
                             "max_lines_legend": 1,
@@ -346,10 +323,10 @@
                                                     "label": "Job Runs",
                                                     "operationType": "date_histogram",
                                                     "params": {
-                                                        "dropPartials": false,
+                                                        "dropPartials": true,
                                                         "ignoreTimeRange": false,
                                                         "includeEmptyRows": true,
-                                                        "interval": "h"
+                                                        "interval": "auto"
                                                     },
                                                     "sourceField": "job.end_time"
                                                 },
@@ -943,11 +920,6 @@
                                 "id": "logs-*",
                                 "name": "17c43ce2-a677-45d7-be23-621a7b0a4ae7",
                                 "type": "index-pattern"
-                            },
-                            {
-                                "id": "75211979-677e-4267-84c3-5d5073befd7d",
-                                "name": "tag-ref-75211979-677e-4267-84c3-5d5073befd7d",
-                                "type": "tag"
                             }
                         ],
                         "state": {
@@ -1096,11 +1068,6 @@
                                 "id": "logs-*",
                                 "name": "d6fe6385-0246-4dd9-9877-9d0911b77b25",
                                 "type": "index-pattern"
-                            },
-                            {
-                                "id": "75211979-677e-4267-84c3-5d5073befd7d",
-                                "name": "tag-ref-75211979-677e-4267-84c3-5d5073befd7d",
-                                "type": "tag"
                             }
                         ],
                         "state": {
@@ -1786,7 +1753,7 @@
         "version": 1
     },
     "coreMigrationVersion": "8.8.0",
-    "created_at": "2025-11-23T00:24:56.884Z",
+    "created_at": "2025-11-23T02:16:16.238Z",
     "created_by": "u_mGBROF_q5bmFCATbLXAcCwKa0k8JvONAwSruelyKA5E_0",
     "id": "databricks-8a5771bf-020b-4000-b798-4e8231849680",
     "references": [
