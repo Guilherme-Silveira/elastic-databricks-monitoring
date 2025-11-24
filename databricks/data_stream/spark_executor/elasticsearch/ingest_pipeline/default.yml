@@ -4,10 +4,24 @@ processors:
   - set:
       field: ecs.version
       value: '8.11.0'
-  - rename:
-      field: jolokia.metrics
-      target_field: databricks
-      ignore_missing: true
+  - script:
+      lang: painless
+      description: Copy jolokia.metrics fields to databricks namespace
+      if: ctx?.jolokia?.metrics != null
+      ignore_failure: true
+      source: |
+        if (ctx.databricks == null) {
+          ctx.databricks = new HashMap();
+        }
+        if (ctx.jolokia?.metrics?.executor != null) {
+          ctx.databricks.executor = ctx.jolokia.metrics.executor;
+        }
+        if (ctx.jolokia?.metrics?.mbean != null) {
+          if (ctx.databricks.executor == null) {
+            ctx.databricks.executor = new HashMap();
+          }
+          ctx.databricks.executor.mbean = ctx.jolokia.metrics.mbean;
+        }
   - set:
       field: event.type
       value: [info]
@@ -20,11 +34,11 @@ processors:
   - script:
       lang: painless
       description: This script will add the name of application under key 'driver/executor.application_name' and executor id under 'databricks.executor.id'
-      if: ctx?.databricks?.mbean?.contains("name=worker.") == false &&
-          ctx?.databricks?.mbean?.contains("name=worker.") == false &&
-          ctx?.databricks?.mbean?.contains("name=application.") == false 
+      if: ctx?.databricks?.executor?.mbean?.contains("name=worker.") == false &&
+          ctx?.databricks?.executor?.mbean?.contains("name=worker.") == false &&
+          ctx?.databricks?.executor?.mbean?.contains("name=application.") == false 
       source: >-
-        def bean_name = ctx.databricks.mbean.toString().splitOnToken("=")[1];
+        def bean_name = ctx.databricks.executor.mbean.toString().splitOnToken("=")[1];
         def app_name = bean_name.splitOnToken(".")[0];
         def executor_id = bean_name.splitOnToken(".")[1];
         if (executor_id == "driver") {
@@ -33,10 +47,6 @@ processors:
           ctx.databricks.executor.application_name = app_name;
           ctx.databricks.executor.id = executor_id;
         }
-  - rename:
-      field: databricks.mbean
-      target_field: databricks.executor.mbean
-      ignore_missing: true
   - remove:
       field:
         - jolokia

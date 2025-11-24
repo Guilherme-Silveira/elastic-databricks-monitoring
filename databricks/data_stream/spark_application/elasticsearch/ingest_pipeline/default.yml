@@ -4,10 +4,24 @@ processors:
   - set:
       field: ecs.version
       value: '8.11.0'
-  - rename:
-      field: jolokia.metrics
-      target_field: databricks
-      ignore_missing: true
+  - script:
+      lang: painless
+      description: Copy jolokia.metrics fields to databricks namespace
+      if: ctx?.jolokia?.metrics != null
+      ignore_failure: true
+      source: |
+        if (ctx.databricks == null) {
+          ctx.databricks = new HashMap();
+        }
+        if (ctx.jolokia?.metrics?.application != null) {
+          ctx.databricks.application = ctx.jolokia.metrics.application;
+        }
+        if (ctx.jolokia?.metrics?.mbean != null) {
+          if (ctx.databricks.application == null) {
+            ctx.databricks.application = new HashMap();
+          }
+          ctx.databricks.application.mbean = ctx.jolokia.metrics.mbean;
+        }
   - set:
       field: event.type
       value: [info]
@@ -20,18 +34,14 @@ processors:
   - script:
       lang: painless
       description: This script will add the name of application under key 'application.name'
-      if: ctx?.databricks?.mbean?.contains("name=application") == true
+      if: ctx?.databricks?.application?.mbean?.contains("name=application") == true
       source: >-
-        def bean_name = ctx.databricks.mbean.toString().splitOnToken(".");
+        def bean_name = ctx.databricks.application.mbean.toString().splitOnToken(".");
         def app_name = "";
         if (bean_name[0].contains("name=application") == true) {
             app_name = bean_name[1] + "." + bean_name[2];
         }
         ctx.databricks.application.name = app_name;
-  - rename:
-      field: databricks.mbean
-      target_field: databricks.application.mbean
-      ignore_missing: true
   - remove:
       field:
         - jolokia

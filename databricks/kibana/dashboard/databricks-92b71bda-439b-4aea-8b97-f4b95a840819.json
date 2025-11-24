@@ -120,10 +120,10 @@
                                             "system.load",
                                             "system.filesystem",
                                             "system.diskio",
-                                            "databricks.application",
-                                            "databricks.driver",
-                                            "databricks.executor",
-                                            "databricks.node"
+                                            "databricks.spark_application",
+                                            "databricks.spark_driver",
+                                            "databricks.spark_executor",
+                                            "databricks.spark_node"
                                         ],
                                         "type": "phrases",
                                         "value": [
@@ -135,10 +135,10 @@
                                             "system.load",
                                             "system.filesystem",
                                             "system.diskio",
-                                            "databricks.application",
-                                            "databricks.driver",
-                                            "databricks.executor",
-                                            "databricks.node"
+                                            "databricks.spark_application",
+                                            "databricks.spark_driver",
+                                            "databricks.spark_executor",
+                                            "databricks.spark_node"
                                         ]
                                     },
                                     "query": {
@@ -192,12 +192,12 @@
                                                 },
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "databricks.driver"
+                                                        "data_stream.dataset": "databricks.spark_driver"
                                                     }
                                                 },
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "databricks.executor"
+                                                        "data_stream.dataset": "databricks.spark_executor"
                                                     }
                                                 },
                                                 {
@@ -4572,13 +4572,13 @@
                                         "key": "data_stream.dataset",
                                         "negate": false,
                                         "params": [
-                                            "databricks.driver",
-                                            "databricks.executor"
+                                            "databricks.spark_driver",
+                                            "databricks.spark_executor"
                                         ],
                                         "type": "phrases",
                                         "value": [
-                                            "databricks.driver",
-                                            "databricks.executor"
+                                            "databricks.spark_driver",
+                                            "databricks.spark_executor"
                                         ]
                                     },
                                     "query": {
@@ -4587,12 +4587,12 @@
                                             "should": [
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "databricks.driver"
+                                                        "data_stream.dataset": "databricks.spark_driver"
                                                     }
                                                 },
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "databricks.executor"
+                                                        "data_stream.dataset": "databricks.spark_executor"
                                                     }
                                                 }
                                             ]
@@ -4677,13 +4677,13 @@
                                 "key": "data_stream.dataset",
                                 "negate": false,
                                 "params": [
-                                    "databricks.driver",
-                                    "databricks.executor"
+                                    "databricks.spark_driver",
+                                    "databricks.spark_executor"
                                 ],
                                 "type": "phrases",
                                 "value": [
-                                    "databricks.driver",
-                                    "databricks.executor"
+                                    "databricks.spark_driver",
+                                    "databricks.spark_executor"
                                 ]
                             },
                             "query": {
@@ -4692,12 +4692,12 @@
                                     "should": [
                                         {
                                             "match_phrase": {
-                                                "data_stream.dataset": "databricks.driver"
+                                                "data_stream.dataset": "databricks.spark_driver"
                                             }
                                         },
                                         {
                                             "match_phrase": {
-                                                "data_stream.dataset": "databricks.executor"
+                                                "data_stream.dataset": "databricks.spark_executor"
                                             }
                                         }
                                     ]

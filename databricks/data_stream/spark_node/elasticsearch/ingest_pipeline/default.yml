@@ -4,10 +4,24 @@ processors:
   - set:
       field: ecs.version
       value: '8.11.0'
-  - rename:
-      field: jolokia.metrics
-      target_field: databricks
-      ignore_missing: true
+  - script:
+      lang: painless
+      description: Copy jolokia.metrics fields to databricks namespace
+      if: ctx?.jolokia?.metrics != null
+      ignore_failure: true
+      source: |
+        if (ctx.databricks == null) {
+          ctx.databricks = new HashMap();
+        }
+        if (ctx.jolokia?.metrics?.node != null) {
+          ctx.databricks.node = ctx.jolokia.metrics.node;
+        }
+        if (ctx.jolokia?.metrics?.mbean != null) {
+          if (ctx.databricks.node == null) {
+            ctx.databricks.node = new HashMap();
+          }
+          ctx.databricks.node.mbean = ctx.jolokia.metrics.mbean;
+        }
   - set:
       field: event.type
       value: [info]
