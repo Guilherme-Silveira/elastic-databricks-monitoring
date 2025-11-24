@@ -385,13 +385,11 @@ inputs:
               instance_type: ${DB_INSTANCE_TYPE}
               cluster_name: ${DB_CLUSTER_NAME}
               is_job_cluster: ${DB_IS_JOB_CLUSTER}
-  - data_stream:
-      namespace: default
-      name: apache-spark-1
-    id: apache-spark-1
+  - id: databricks-spark-metrics
+    type: jolokia/metrics
     streams:
       - data_stream:
-          dataset: apache_spark.application
+          dataset: databricks.spark_application
           type: metrics
         id: application-1
         hosts:
@@ -433,7 +431,7 @@ inputs:
               is_job_cluster: ${DB_IS_JOB_CLUSTER}
         period: 60s
       - data_stream:
-          dataset: apache_spark.node
+          dataset: databricks.spark_node
           type: metrics
         id: node-1
         hosts:
@@ -499,7 +497,7 @@ inputs:
               is_job_cluster: ${DB_IS_JOB_CLUSTER}
         period: 60s
       - data_stream:
-          dataset: apache_spark.executor
+          dataset: databricks.spark_executor
           type: metrics
         hosts:
           - http://localhost:7777
@@ -789,7 +787,7 @@ inputs:
               is_job_cluster: ${DB_IS_JOB_CLUSTER}
         period: 60s
       - data_stream:
-          dataset: apache_spark.driver
+          dataset: databricks.spark_driver
           type: metrics
         id: driver-1
         hosts:

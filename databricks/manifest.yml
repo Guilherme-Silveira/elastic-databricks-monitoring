@@ -19,8 +19,8 @@ icons:
     type: "image/svg+xml"
 policy_templates:
   - name: databricks
-    title: Databricks Job Runs Monitoring
-    description: Collect job run information from Databricks API
+    title: Databricks Monitoring
+    description: Collect job run information from Databricks API and Apache Spark metrics from clusters
     inputs:
       - type: httpjson
         title: Databricks Job Runs
@@ -53,6 +53,9 @@ policy_templates:
             default: 5h
             required: true
             show_user: true
+      - type: jolokia/metrics
+        title: Apache Spark Metrics
+        description: Collect Apache Spark metrics from Databricks clusters via Jolokia
 owner:
   github: elastic/integrations
   type: elastic

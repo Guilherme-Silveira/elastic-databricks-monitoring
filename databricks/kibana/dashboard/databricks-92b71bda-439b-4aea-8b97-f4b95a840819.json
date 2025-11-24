@@ -120,10 +120,10 @@
                                             "system.load",
                                             "system.filesystem",
                                             "system.diskio",
-                                            "apache_spark.application",
-                                            "apache_spark.driver",
-                                            "apache_spark.executor",
-                                            "apache_spark.node"
+                                            "databricks.application",
+                                            "databricks.driver",
+                                            "databricks.executor",
+                                            "databricks.node"
                                         ],
                                         "type": "phrases",
                                         "value": [
@@ -135,10 +135,10 @@
                                             "system.load",
                                             "system.filesystem",
                                             "system.diskio",
-                                            "apache_spark.application",
-                                            "apache_spark.driver",
-                                            "apache_spark.executor",
-                                            "apache_spark.node"
+                                            "databricks.application",
+                                            "databricks.driver",
+                                            "databricks.executor",
+                                            "databricks.node"
                                         ]
                                     },
                                     "query": {
@@ -187,22 +187,22 @@
                                                 },
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "apache_spark.application"
+                                                        "data_stream.dataset": "databricks.application"
                                                     }
                                                 },
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "apache_spark.driver"
+                                                        "data_stream.dataset": "databricks.driver"
                                                     }
                                                 },
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "apache_spark.executor"
+                                                        "data_stream.dataset": "databricks.executor"
                                                     }
                                                 },
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "apache_spark.node"
+                                                        "data_stream.dataset": "databricks.node"
                                                     }
                                                 }
                                             ]
@@ -924,7 +924,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.driver.jobs.succeeded"
+                                                    "sourceField": "databricks.driver.jobs.succeeded"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -941,14 +941,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "b5592314-e99b-4ef7-bc6d-69993664fb6f",
-                                        "key": "apache_spark.driver.jobs.succeeded",
+                                        "key": "databricks.driver.jobs.succeeded",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.driver.jobs.succeeded"
+                                            "field": "databricks.driver.jobs.succeeded"
                                         }
                                     }
                                 }
@@ -985,14 +985,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "b5592314-e99b-4ef7-bc6d-69993664fb6f",
-                                "key": "apache_spark.driver.jobs.succeeded",
+                                "key": "databricks.driver.jobs.succeeded",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.driver.jobs.succeeded"
+                                    "field": "databricks.driver.jobs.succeeded"
                                 }
                             }
                         }
@@ -1053,7 +1053,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.driver.jobs.failed"
+                                                    "sourceField": "databricks.driver.jobs.failed"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -1070,14 +1070,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "830070a2-3bf5-40df-a57d-1094cfef42f3",
-                                        "key": "apache_spark.driver.jobs.failed",
+                                        "key": "databricks.driver.jobs.failed",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.driver.jobs.failed"
+                                            "field": "databricks.driver.jobs.failed"
                                         }
                                     }
                                 }
@@ -1114,14 +1114,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "830070a2-3bf5-40df-a57d-1094cfef42f3",
-                                "key": "apache_spark.driver.jobs.failed",
+                                "key": "databricks.driver.jobs.failed",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.driver.jobs.failed"
+                                    "field": "databricks.driver.jobs.failed"
                                 }
                             }
                         }
@@ -1265,7 +1265,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.driver.stages.completed_count"
+                                                    "sourceField": "databricks.driver.stages.completed_count"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -1282,14 +1282,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "9a5b37cb-eea9-4078-8237-c5a920e37075",
-                                        "key": "apache_spark.driver.stages.completed_count",
+                                        "key": "databricks.driver.stages.completed_count",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.driver.stages.completed_count"
+                                            "field": "databricks.driver.stages.completed_count"
                                         }
                                     }
                                 }
@@ -1327,14 +1327,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "9a5b37cb-eea9-4078-8237-c5a920e37075",
-                                "key": "apache_spark.driver.stages.completed_count",
+                                "key": "databricks.driver.stages.completed_count",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.driver.stages.completed_count"
+                                    "field": "databricks.driver.stages.completed_count"
                                 }
                             }
                         }
@@ -1395,7 +1395,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.driver.stages.skipped_count"
+                                                    "sourceField": "databricks.driver.stages.skipped_count"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -1412,14 +1412,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "b6da6da2-e44f-4c9b-86f1-3314d21ad564",
-                                        "key": "apache_spark.driver.stages.skipped_count",
+                                        "key": "databricks.driver.stages.skipped_count",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.driver.stages.skipped_count"
+                                            "field": "databricks.driver.stages.skipped_count"
                                         }
                                     }
                                 }
@@ -1456,14 +1456,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "b6da6da2-e44f-4c9b-86f1-3314d21ad564",
-                                "key": "apache_spark.driver.stages.skipped_count",
+                                "key": "databricks.driver.stages.skipped_count",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.driver.stages.skipped_count"
+                                    "field": "databricks.driver.stages.skipped_count"
                                 }
                             }
                         }
@@ -1524,7 +1524,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.driver.stages.failed_count"
+                                                    "sourceField": "databricks.driver.stages.failed_count"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -1541,14 +1541,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "f847ce79-3f28-48ad-bdfe-383de0a679a2",
-                                        "key": "apache_spark.driver.stages.failed_count",
+                                        "key": "databricks.driver.stages.failed_count",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.driver.stages.failed_count"
+                                            "field": "databricks.driver.stages.failed_count"
                                         }
                                     }
                                 }
@@ -1585,14 +1585,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "f847ce79-3f28-48ad-bdfe-383de0a679a2",
-                                "key": "apache_spark.driver.stages.failed_count",
+                                "key": "databricks.driver.stages.failed_count",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.driver.stages.failed_count"
+                                    "field": "databricks.driver.stages.failed_count"
                                 }
                             }
                         }
@@ -2004,7 +2004,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.bytes.written"
+                                                    "sourceField": "databricks.executor.bytes.written"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -2021,14 +2021,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "f4140b61-62cd-4abe-a34e-bb7a1d14fefb",
-                                        "key": "apache_spark.executor.bytes.written",
+                                        "key": "databricks.executor.bytes.written",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.executor.bytes.written"
+                                            "field": "databricks.executor.bytes.written"
                                         }
                                     }
                                 }
@@ -2063,14 +2063,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "f4140b61-62cd-4abe-a34e-bb7a1d14fefb",
-                                "key": "apache_spark.executor.bytes.written",
+                                "key": "databricks.executor.bytes.written",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.executor.bytes.written"
+                                    "field": "databricks.executor.bytes.written"
                                 }
                             }
                         }
@@ -2130,7 +2130,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.records.written"
+                                                    "sourceField": "databricks.executor.records.written"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -2147,14 +2147,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "3602cfcf-280e-49ef-a6ad-9e1384efa7e9",
-                                        "key": "apache_spark.executor.records.written",
+                                        "key": "databricks.executor.records.written",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.executor.records.written"
+                                            "field": "databricks.executor.records.written"
                                         }
                                     }
                                 }
@@ -2191,14 +2191,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "3602cfcf-280e-49ef-a6ad-9e1384efa7e9",
-                                "key": "apache_spark.executor.records.written",
+                                "key": "databricks.executor.records.written",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.executor.records.written"
+                                    "field": "databricks.executor.records.written"
                                 }
                             }
                         }
@@ -2266,7 +2266,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.shuffle.bytes_written"
+                                                    "sourceField": "databricks.executor.shuffle.bytes_written"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -2282,16 +2282,16 @@
                                     "meta": {
                                         "alias": null,
                                         "disabled": false,
-                                        "field": "apache_spark.executor.shuffle.bytes_written",
+                                        "field": "databricks.executor.shuffle.bytes_written",
                                         "index": "c47ae643-2a1f-439f-90ef-19c2bbee7ed5",
-                                        "key": "apache_spark.executor.shuffle.bytes_written",
+                                        "key": "databricks.executor.shuffle.bytes_written",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.executor.shuffle.bytes_written"
+                                            "field": "databricks.executor.shuffle.bytes_written"
                                         }
                                     }
                                 }
@@ -2327,16 +2327,16 @@
                             "meta": {
                                 "alias": null,
                                 "disabled": false,
-                                "field": "apache_spark.executor.shuffle.bytes_written",
+                                "field": "databricks.executor.shuffle.bytes_written",
                                 "index": "c47ae643-2a1f-439f-90ef-19c2bbee7ed5",
-                                "key": "apache_spark.executor.shuffle.bytes_written",
+                                "key": "databricks.executor.shuffle.bytes_written",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.executor.shuffle.bytes_written"
+                                    "field": "databricks.executor.shuffle.bytes_written"
                                 }
                             }
                         }
@@ -2408,7 +2408,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.bytes.read"
+                                                    "sourceField": "databricks.executor.bytes.read"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -2425,14 +2425,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "e2038555-6ef6-4a33-b50c-c175b2ebbe02",
-                                        "key": "apache_spark.executor.bytes.read",
+                                        "key": "databricks.executor.bytes.read",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.executor.bytes.read"
+                                            "field": "databricks.executor.bytes.read"
                                         }
                                     }
                                 }
@@ -2467,14 +2467,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "e2038555-6ef6-4a33-b50c-c175b2ebbe02",
-                                "key": "apache_spark.executor.bytes.read",
+                                "key": "databricks.executor.bytes.read",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.executor.bytes.read"
+                                    "field": "databricks.executor.bytes.read"
                                 }
                             }
                         }
@@ -2534,7 +2534,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.records.read"
+                                                    "sourceField": "databricks.executor.records.read"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -2551,14 +2551,14 @@
                                         "alias": null,
                                         "disabled": false,
                                         "index": "f4a2fb8e-abca-4281-a05d-0674a52289b5",
-                                        "key": "apache_spark.executor.records.read",
+                                        "key": "databricks.executor.records.read",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.executor.records.read"
+                                            "field": "databricks.executor.records.read"
                                         }
                                     }
                                 }
@@ -2595,14 +2595,14 @@
                                 "alias": null,
                                 "disabled": false,
                                 "index": "f4a2fb8e-abca-4281-a05d-0674a52289b5",
-                                "key": "apache_spark.executor.records.read",
+                                "key": "databricks.executor.records.read",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.executor.records.read"
+                                    "field": "databricks.executor.records.read"
                                 }
                             }
                         }
@@ -2670,7 +2670,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.shuffle.total.bytes_read"
+                                                    "sourceField": "databricks.executor.shuffle.total.bytes_read"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -2686,16 +2686,16 @@
                                     "meta": {
                                         "alias": null,
                                         "disabled": false,
-                                        "field": "apache_spark.executor.shuffle.total.bytes_read",
+                                        "field": "databricks.executor.shuffle.total.bytes_read",
                                         "index": "a1bcddfd-7e17-4cdd-8238-df32658180e1",
-                                        "key": "apache_spark.executor.shuffle.total.bytes_read",
+                                        "key": "databricks.executor.shuffle.total.bytes_read",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.executor.shuffle.total.bytes_read"
+                                            "field": "databricks.executor.shuffle.total.bytes_read"
                                         }
                                     }
                                 }
@@ -2731,16 +2731,16 @@
                             "meta": {
                                 "alias": null,
                                 "disabled": false,
-                                "field": "apache_spark.executor.shuffle.total.bytes_read",
+                                "field": "databricks.executor.shuffle.total.bytes_read",
                                 "index": "a1bcddfd-7e17-4cdd-8238-df32658180e1",
-                                "key": "apache_spark.executor.shuffle.total.bytes_read",
+                                "key": "databricks.executor.shuffle.total.bytes_read",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.executor.shuffle.total.bytes_read"
+                                    "field": "databricks.executor.shuffle.total.bytes_read"
                                 }
                             }
                         }
@@ -3866,7 +3866,7 @@
                                                                 "decimals": 2
                                                             }
                                                         },
-                                                        "formula": "max(apache_spark.driver.memory.on_heap.max) * 1024 * 1024",
+                                                        "formula": "max(databricks.driver.memory.on_heap.max) * 1024 * 1024",
                                                         "isFormulaBroken": false
                                                     },
                                                     "references": [
@@ -3882,7 +3882,7 @@
                                                     "params": {
                                                         "emptyAsNull": false
                                                     },
-                                                    "sourceField": "apache_spark.driver.memory.on_heap.max"
+                                                    "sourceField": "databricks.driver.memory.on_heap.max"
                                                 },
                                                 "65e537ff-a8d3-423e-9dde-bd6fbe481cedX1": {
                                                     "customLabel": true,
@@ -3908,7 +3908,7 @@
                                                                 "min": 0
                                                             },
                                                             "name": "multiply",
-                                                            "text": "max(apache_spark.driver.memory.on_heap.max) * 1024 * 1024",
+                                                            "text": "max(databricks.driver.memory.on_heap.max) * 1024 * 1024",
                                                             "type": "function"
                                                         }
                                                     },
@@ -3942,7 +3942,7 @@
                                                                 "decimals": 0
                                                             }
                                                         },
-                                                        "formula": "average(apache_spark.driver.memory.on_heap.used) * 1024 * 1024",
+                                                        "formula": "average(databricks.driver.memory.on_heap.used) * 1024 * 1024",
                                                         "isFormulaBroken": false
                                                     },
                                                     "references": [
@@ -3958,7 +3958,7 @@
                                                     "params": {
                                                         "emptyAsNull": false
                                                     },
-                                                    "sourceField": "apache_spark.driver.memory.on_heap.used"
+                                                    "sourceField": "databricks.driver.memory.on_heap.used"
                                                 },
                                                 "ce3c54dc-4fe6-41c5-8141-5852f81330a9X1": {
                                                     "customLabel": true,
@@ -3984,7 +3984,7 @@
                                                                 "min": 0
                                                             },
                                                             "name": "multiply",
-                                                            "text": "average(apache_spark.driver.memory.on_heap.used) * 1024 * 1024",
+                                                            "text": "average(databricks.driver.memory.on_heap.used) * 1024 * 1024",
                                                             "type": "function"
                                                         }
                                                     },
@@ -4520,7 +4520,7 @@
                                                     "dataType": "number",
                                                     "filter": {
                                                         "language": "kuery",
-                                                        "query": "\"apache_spark.driver.jobs.failed\": *"
+                                                        "query": "\"databricks.driver.jobs.failed\": *"
                                                     },
                                                     "isBucketed": false,
                                                     "label": "Jobs Failed",
@@ -4528,14 +4528,14 @@
                                                     "params": {
                                                         "sortField": "@timestamp"
                                                     },
-                                                    "sourceField": "apache_spark.driver.jobs.failed"
+                                                    "sourceField": "databricks.driver.jobs.failed"
                                                 },
                                                 "cffa45b0-954e-4a4b-8b1c-66236c838a6c": {
                                                     "customLabel": true,
                                                     "dataType": "number",
                                                     "filter": {
                                                         "language": "kuery",
-                                                        "query": "\"apache_spark.driver.jobs.succeeded\": *"
+                                                        "query": "\"databricks.driver.jobs.succeeded\": *"
                                                     },
                                                     "isBucketed": false,
                                                     "label": "Job Succeeded",
@@ -4543,7 +4543,7 @@
                                                     "params": {
                                                         "sortField": "@timestamp"
                                                     },
-                                                    "sourceField": "apache_spark.driver.jobs.succeeded"
+                                                    "sourceField": "databricks.driver.jobs.succeeded"
                                                 }
                                             },
                                             "ignoreGlobalFilters": false,
@@ -4572,13 +4572,13 @@
                                         "key": "data_stream.dataset",
                                         "negate": false,
                                         "params": [
-                                            "apache_spark.driver",
-                                            "apache_spark.executor"
+                                            "databricks.driver",
+                                            "databricks.executor"
                                         ],
                                         "type": "phrases",
                                         "value": [
-                                            "apache_spark.driver",
-                                            "apache_spark.executor"
+                                            "databricks.driver",
+                                            "databricks.executor"
                                         ]
                                     },
                                     "query": {
@@ -4587,12 +4587,12 @@
                                             "should": [
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "apache_spark.driver"
+                                                        "data_stream.dataset": "databricks.driver"
                                                     }
                                                 },
                                                 {
                                                     "match_phrase": {
-                                                        "data_stream.dataset": "apache_spark.executor"
+                                                        "data_stream.dataset": "databricks.executor"
                                                     }
                                                 }
                                             ]
@@ -4677,13 +4677,13 @@
                                 "key": "data_stream.dataset",
                                 "negate": false,
                                 "params": [
-                                    "apache_spark.driver",
-                                    "apache_spark.executor"
+                                    "databricks.driver",
+                                    "databricks.executor"
                                 ],
                                 "type": "phrases",
                                 "value": [
-                                    "apache_spark.driver",
-                                    "apache_spark.executor"
+                                    "databricks.driver",
+                                    "databricks.executor"
                                 ]
                             },
                             "query": {
@@ -4692,12 +4692,12 @@
                                     "should": [
                                         {
                                             "match_phrase": {
-                                                "data_stream.dataset": "apache_spark.driver"
+                                                "data_stream.dataset": "databricks.driver"
                                             }
                                         },
                                         {
                                             "match_phrase": {
-                                                "data_stream.dataset": "apache_spark.executor"
+                                                "data_stream.dataset": "databricks.executor"
                                             }
                                         }
                                     ]
@@ -5233,7 +5233,7 @@
                                                     "label": "Completed",
                                                     "operationType": "max",
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.driver.tasks.completed"
+                                                    "sourceField": "databricks.driver.tasks.completed"
                                                 },
                                                 "16d7f486-58c7-46a1-96ea-d2be88b82633": {
                                                     "customLabel": true,
@@ -5242,7 +5242,7 @@
                                                     "label": "Skipped",
                                                     "operationType": "max",
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.driver.tasks.skipped"
+                                                    "sourceField": "databricks.driver.tasks.skipped"
                                                 },
                                                 "8c4d8d9d-46d4-4140-8aa7-5e8066fd577a": {
                                                     "customLabel": true,
@@ -5251,7 +5251,7 @@
                                                     "label": "Failed",
                                                     "operationType": "max",
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.driver.tasks.failed"
+                                                    "sourceField": "databricks.driver.tasks.failed"
                                                 },
                                                 "f4ed5f54-aae1-4dfe-82bf-e5d6181beef3": {
                                                     "customLabel": true,
@@ -5276,7 +5276,7 @@
                             "internalReferences": [],
                             "query": {
                                 "language": "kuery",
-                                "query": "apache_spark.driver.tasks.failed : * or apache_spark.driver.tasks.skipped : * or apache_spark.driver.tasks.completed : * "
+                                "query": "databricks.driver.tasks.failed : * or databricks.driver.tasks.skipped : * or databricks.driver.tasks.completed : * "
                             },
                             "visualization": {
                                 "fittingFunction": "Linear",
@@ -5348,7 +5348,7 @@
                     "hidePanelTitles": false,
                     "query": {
                         "language": "kuery",
-                        "query": "apache_spark.driver.tasks.failed : * or apache_spark.driver.tasks.skipped : * or apache_spark.driver.tasks.completed : * "
+                        "query": "databricks.driver.tasks.failed : * or databricks.driver.tasks.skipped : * or databricks.driver.tasks.completed : * "
                     },
                     "syncColors": false,
                     "syncCursor": true,
@@ -5395,7 +5395,7 @@
                                                     "label": "Started",
                                                     "operationType": "max",
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.threadpool.started_tasks"
+                                                    "sourceField": "databricks.executor.threadpool.started_tasks"
                                                 },
                                                 "16d7f486-58c7-46a1-96ea-d2be88b82633": {
                                                     "customLabel": true,
@@ -5404,7 +5404,7 @@
                                                     "label": "Active",
                                                     "operationType": "max",
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.threadpool.active_tasks"
+                                                    "sourceField": "databricks.executor.threadpool.active_tasks"
                                                 },
                                                 "8c4d8d9d-46d4-4140-8aa7-5e8066fd577a": {
                                                     "customLabel": true,
@@ -5413,7 +5413,7 @@
                                                     "label": "Completed",
                                                     "operationType": "max",
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.threadpool.complete_tasks"
+                                                    "sourceField": "databricks.executor.threadpool.complete_tasks"
                                                 },
                                                 "f4ed5f54-aae1-4dfe-82bf-e5d6181beef3": {
                                                     "customLabel": true,
@@ -5438,7 +5438,7 @@
                             "internalReferences": [],
                             "query": {
                                 "language": "kuery",
-                                "query": "apache_spark.executor.threadpool.complete_tasks : * or apache_spark.executor.threadpool.active_tasks : * or apache_spark.executor.threadpool.started_tasks : * "
+                                "query": "databricks.executor.threadpool.complete_tasks : * or databricks.executor.threadpool.active_tasks : * or databricks.executor.threadpool.started_tasks : * "
                             },
                             "visualization": {
                                 "fittingFunction": "Linear",
@@ -5510,7 +5510,7 @@
                     "hidePanelTitles": false,
                     "query": {
                         "language": "kuery",
-                        "query": "apache_spark.executor.threadpool.complete_tasks : * or apache_spark.executor.threadpool.active_tasks : * or apache_spark.executor.threadpool.started_tasks : * "
+                        "query": "databricks.executor.threadpool.complete_tasks : * or databricks.executor.threadpool.active_tasks : * or databricks.executor.threadpool.started_tasks : * "
                     },
                     "syncColors": false,
                     "syncCursor": true,
@@ -5992,7 +5992,7 @@
                                                         "sortField": "@timestamp"
                                                     },
                                                     "scale": "ratio",
-                                                    "sourceField": "apache_spark.executor.disk_bytes_spilled"
+                                                    "sourceField": "databricks.executor.disk_bytes_spilled"
                                                 }
                                             },
                                             "incompleteColumns": {}
@@ -6008,16 +6008,16 @@
                                     "meta": {
                                         "alias": null,
                                         "disabled": false,
-                                        "field": "apache_spark.executor.disk_bytes_spilled",
+                                        "field": "databricks.executor.disk_bytes_spilled",
                                         "index": "a52b49f9-5dd8-4c1f-af87-e8cecb3586fc",
-                                        "key": "apache_spark.executor.disk_bytes_spilled",
+                                        "key": "databricks.executor.disk_bytes_spilled",
                                         "negate": false,
                                         "type": "exists",
                                         "value": "exists"
                                     },
                                     "query": {
                                         "exists": {
-                                            "field": "apache_spark.executor.disk_bytes_spilled"
+                                            "field": "databricks.executor.disk_bytes_spilled"
                                         }
                                     }
                                 }
@@ -6053,16 +6053,16 @@
                             "meta": {
                                 "alias": null,
                                 "disabled": false,
-                                "field": "apache_spark.executor.disk_bytes_spilled",
+                                "field": "databricks.executor.disk_bytes_spilled",
                                 "index": "a52b49f9-5dd8-4c1f-af87-e8cecb3586fc",
-                                "key": "apache_spark.executor.disk_bytes_spilled",
+                                "key": "databricks.executor.disk_bytes_spilled",
                                 "negate": false,
                                 "type": "exists",
                                 "value": "exists"
                             },
                             "query": {
                                 "exists": {
-                                    "field": "apache_spark.executor.disk_bytes_spilled"
+                                    "field": "databricks.executor.disk_bytes_spilled"
                                 }
                             }
                         }
