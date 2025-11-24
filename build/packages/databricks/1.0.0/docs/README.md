@@ -207,7 +207,10 @@ To verify the init script ran successfully:
    - `logs-spark.driver-*`
    - `logs-spark.executor-*`
    - `metrics-system.*-*`
-   - `metrics-apache_spark.*-*`
+   - `metrics-databricks.spark_application-*`
+   - `metrics-databricks.spark_driver-*`
+   - `metrics-databricks.spark_executor-*`
+   - `metrics-databricks.spark_node-*`
 
 ## Data Streams
 
@@ -310,17 +313,24 @@ The `job_runs` data stream collects information about Databricks job executions 
 - `logs-spark.driver-*` - Spark driver logs
 - `logs-spark.executor-*` - Spark executor logs  
 - `metrics-system.*-*` - System metrics (CPU, memory, disk, network, etc.)
-- `metrics-apache_spark.*-*` - Apache Spark JMX metrics
+- `metrics-databricks.spark_application-*` - Spark application metrics
+- `metrics-databricks.spark_driver-*` - Spark driver metrics
+- `metrics-databricks.spark_executor-*` - Spark executor metrics
+- `metrics-databricks.spark_node-*` - Spark node metrics
 
 The `cluster_metrics` data stream collects Apache Spark JMX metrics via Jolokia agent and system logs from Databricks clusters.
 
 **Metric Sets**:
-- **Driver metrics**: Job statistics, stage statistics, memory usage, DAG scheduler info
+- **Application metrics**: Runtime, cores, status
+- **Driver metrics**: Job statistics, stage statistics, memory usage, DAG scheduler info, executor metrics
 - **Executor metrics**: Bytes read/written, shuffle statistics, memory usage, GC metrics
+- **Node metrics**: Worker metrics, master metrics
 
 **Spark Metric Fields**:
-- `apache_spark.driver.*`: Spark driver metrics
-- `apache_spark.executor.*`: Spark executor metrics
+- `databricks.application.*`: Spark application metrics
+- `databricks.driver.*`: Spark driver metrics
+- `databricks.executor.*`: Spark executor metrics
+- `databricks.node.*`: Spark node/worker metrics
 
 **Databricks Fields**:
 - `databricks.cluster_id`: The ID of the cluster

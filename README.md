@@ -120,7 +120,10 @@ The integration creates the following data streams in Elasticsearch:
 - **Index Pattern**: `logs-spark.driver-*` - Spark driver logs
 - **Index Pattern**: `logs-spark.executor-*` - Spark executor logs
 - **Index Pattern**: `metrics-system.*-*` - System metrics (CPU, memory, disk, network)
-- **Index Pattern**: `metrics-apache_spark.*-*` - Apache Spark JMX metrics
+- **Index Pattern**: `metrics-databricks.spark_application-*` - Apache Spark application metrics
+- **Index Pattern**: `metrics-databricks.spark_driver-*` - Apache Spark driver metrics
+- **Index Pattern**: `metrics-databricks.spark_executor-*` - Apache Spark executor metrics
+- **Index Pattern**: `metrics-databricks.spark_node-*` - Apache Spark node/worker metrics
 
 ## 📈 Dashboards
 
